@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<body>
+<h1>메인 페이지 </h1>
+<div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".slider").bxSlider({
+            touchEnabled : (navigator.maxTouchPoints > 0)
+        })
+    });
+</script>
+
+<div class="home__slider">
+    <div class="slider">
+        <div th:each="x : ${list}">
+            <div th:if="${x.showYn == true}">
+                <a th:href="${x.bannerUrl}" th:if="${x.openCase == 1}" target="_blank">
+                    <img th:src="${x.urlFileName}" th:alt="${x.bannerName}" height="200" style="display: block; margin: auto;"/>
+                </a>
+                <a th:href="${x.bannerUrl}" th:if="${x.openCase == 2}" target="_blank">
+                    <img th:src="${x.urlFileName}" th:alt="${x.bannerName}" height="200" style="display: block; margin: auto;"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
